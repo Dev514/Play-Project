@@ -1,0 +1,13 @@
+[debug] > Exec(y, None, None)
+[error] Not a valid command: y
+[error] Not a valid project ID: y
+[error] Expected ':'
+[error] Not a valid key: y
+[error] y
+[error]  ^
+[debug] > Exec(idea-shell, None, None)
+[debug] > Exec(, None, None)
+[debug] > Exec(idea-shell, None, None)
+[debug] > Exec(, None, None)
+[debug] > Exec(idea-shell, None, None)
+[warn] In the last 1055 seconds, 18.999 (1.8%) were spent in GC. [Heap: 0.49GB free of 0.59GB, max 1.33GB] Consider increasing the JVM heap using `-Xmx` or try a different collector, e.g. `-XX:+UseG1GC`, for better performance.
