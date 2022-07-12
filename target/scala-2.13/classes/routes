@@ -7,6 +7,10 @@ GET     /                           controllers.HomeController.index
 GET    /explore                     controllers.HomeController.explore
 GET    /tutorial                    controllers.HomeController.tutorial
 GET    /hello                       controllers.HomeController.hello
+GET    /user                        controllers.UserController.getUsers
+POST   /adduser                     controllers.UserController.addUser(req: Request)
+GET    /delete/:id                  controllers.UserController.delete(id: String)
+POST   /update                      controllers.UserController.update(req: Request)
 
 
 # Map static resources from the /public folder to the /assets URL path

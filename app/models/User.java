@@ -7,33 +7,33 @@ import javax.persistence.Id;
 @Entity
 public class User  {
     @Id
-    private String userId;
-    private String userName;
+    private String id;
+    private String name;
     private String password;
 
     public User() {
     }
 
     public User(String userId, String userName, String password) {
-        this.userId = userId;
-        this.userName = userName;
+        this.id = userId;
+        this.name = userName;
         this.password = password;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

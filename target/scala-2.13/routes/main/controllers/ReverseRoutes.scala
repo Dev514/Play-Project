@@ -43,14 +43,47 @@ package controllers {
   
   }
 
-  // @LINE:13
+  // @LINE:10
+  class ReverseUserController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:10
+    def getUsers: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user")
+    }
+  
+    // @LINE:11
+    def addUser(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "adduser")
+    }
+  
+    // @LINE:12
+    def delete(id:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "delete/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
+    }
+  
+    // @LINE:13
+    def update(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "update")
+    }
+  
+  }
+
+  // @LINE:17
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:13
+    // @LINE:17
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))

@@ -15,3 +15,6 @@ libraryDependencies ++= Seq(
   "org.hibernate" % "hibernate-core" % "5.4.2.Final" // replace by your jpa implementation
 )
 
+libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.29"
+libraryDependencies += guice
+

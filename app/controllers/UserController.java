@@ -1,26 +1,27 @@
 package controllers;
 
-import com.sun.java.browser.plugin2.liveconnect.v1.Result;
 import models.User;
 import models.UserRepository;
-import play.core.j.HttpExecutionContext;
 import play.data.FormFactory;
-import play.mvc.Call;
+import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.Http;
+import play.mvc.Result;
 
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 
+import static play.libs.Json.toJson;
 import static play.mvc.Results.ok;
-import static play.mvc.Results.redirect;
-import static sun.plugin2.util.PojoUtil.toJson;
 
 public class UserController {
 
+
     private final FormFactory formFactory;
+
     private final UserRepository userRepository;
     private final HttpExecutionContext ec;
+
 
     @Inject
     public UserController(FormFactory formFactory, UserRepository userRepository, HttpExecutionContext ec) {
@@ -37,12 +38,31 @@ public class UserController {
         User person = formFactory.form(User.class).bindFromRequest(request).get();
         return userRepository
                 .add(person)
-                .thenApplyAsync(p -> redirect(routes.UserController.index()), ec);
+                .thenApplyAsync(p -> ok(
+                //        Json.toJson(p)
+                        "Created"
+                ), ec.current());
     }
 
     public CompletionStage<Result> getUsers() {
         return userRepository
                 .list()
-                .thenApplyAsync(personStream -> ok(toJson(personStream.collect(Collectors.toList()))), ec);
+                .thenApplyAsync(personStream -> ok(toJson(personStream.collect(Collectors.toList()))), ec.current());
+
+    }
+
+    public Result delete(String id) {
+         userRepository
+                .delete(id);
+         return ok("Deleted");
+    }
+
+    public CompletionStage<Result> update(final Http.Request request) {
+        User person = formFactory.form(User.class).bindFromRequest(request).get();
+        return userRepository
+                .update(person)
+                .thenApplyAsync(p -> ok(
+                        toJson(p)
+                ), ec.current());
     }
 }
